@@ -64,8 +64,7 @@ var ToastProvider = ({ children }) => {
   return /* @__PURE__ */ jsxRuntime.jsx(ToastContext.Provider, { value, children });
 };
 var Icon = ({ name, ...props }) => {
-  const fallback = lucideReact.icons.CircleHelp;
-  const LucideIcon = name && lucideReact.icons[name] || fallback;
+  const LucideIcon = name && lucideReact.icons[name] || lucideReact.CircleHelp;
   return /* @__PURE__ */ jsxRuntime.jsx(LucideIcon, { ...props });
 };
 var icon_default = Icon;

@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, useContext, useCallback, useMemo, useRef, useLayoutEffect, useId } from 'react';
 import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
-import { icons } from 'lucide-react';
+import { icons, CircleHelp } from 'lucide-react';
 import { createPortal } from 'react-dom';
 
 // src/hooks.tsx
@@ -62,8 +62,7 @@ var ToastProvider = ({ children }) => {
   return /* @__PURE__ */ jsx(ToastContext.Provider, { value, children });
 };
 var Icon = ({ name, ...props }) => {
-  const fallback = icons.CircleHelp;
-  const LucideIcon = name && icons[name] || fallback;
+  const LucideIcon = name && icons[name] || CircleHelp;
   return /* @__PURE__ */ jsx(LucideIcon, { ...props });
 };
 var icon_default = Icon;
