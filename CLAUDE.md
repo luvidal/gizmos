@@ -1,0 +1,106 @@
+# Gizmos
+
+UI component library extracted from [jogi](../jogi). Provides themed, reusable components: buttons, inputs, selects, modals, accordions, tooltips, skeletons, cards, and more.
+
+## Quick Reference
+
+```bash
+npm run build        # Build with tsup → dist/ (ESM + CJS + .d.ts)
+npm run dev          # Build in watch mode
+npm run preview      # Visual test page at http://localhost:5173
+npm test             # Run unit tests
+npm run test:watch   # Run tests in watch mode
+```
+
+## Tech Stack
+
+- **TypeScript** + **React** (peer dep)
+- **tsup** for bundling
+- **Vite** for visual dev/test page
+- **Vitest** + **happy-dom** for unit tests
+- **Tailwind CSS** classes (consumer must include `dist/` in their tailwind content config)
+- **lucide-react** for icons (peer dep)
+
+## Project Structure
+
+```
+src/
+├── index.tsx              # Re-export hub (no component code)
+├── common/                # Shared hooks, utils
+└── (component dirs)       # One dir per component group
+
+dev/
+├── index.html             # Visual test page entry point
+├── main.tsx               # Renders test scenarios
+├── tailwind.css           # Tailwind base styles
+└── vite.config.ts         # Vite config for dev page
+
+tests/
+└── *.test.ts              # Unit tests
+
+docs/
+└── *.md                   # Design docs, migration notes
+```
+
+## Communication Style
+
+- **No emotional validation** — never say "I understand your frustration". Results matter, not words.
+- **No excessive apologies** — don't apologize repeatedly. Fix the problem.
+- **Be direct** — state facts, propose solutions, execute. Skip the fluff.
+
+## Spanish Copy Standard
+
+All user-facing text uses informal **tú**, never **usted**:
+- Imperatives: `ingresa`, `selecciona`, `agrega` (NOT `ingrese`, `seleccione`, `agregue`)
+- Possessives: `tu`, `tus` (NOT `su`, `sus`)
+- Pronouns: `te`, `ti`, `tú` (NOT `le`, `usted`)
+
+## Code Rules
+
+1. **One component per file**
+2. **File naming** → lowercase, no hyphens/underscores (e.g., `editablecell.tsx`, not `editable-cell.tsx`)
+3. **No `@/` imports** — all imports are relative within `src/`
+4. **Icons** — use direct lucide-react imports (`import { icons } from 'lucide-react'`), not a wrapper component
+5. **Tailwind classes** — the package ships class strings but does NOT bundle CSS. Consumers add the dist path to their `tailwind.config.ts` content array
+6. **API stability** — exported props interfaces must stay backward-compatible with jogi's call sites. Breaking changes require updating jogi's re-export shims
+7. **No domain logic** — components must not import domain-specific data (doctypes, section colors, user roles). All customization via props
+8. **Theming** — use CSS custom properties (`--theme-50` through `--theme-950`) for role-based colors. Semantic colors (danger=rose, warning=amber, success=emerald, info=violet) are hardcoded Tailwind values
+9. **After modifying a feature**, update this CLAUDE.md if any key behavior changed
+10. **README.md maintenance** — every modification to a component folder must update its `README.md` to reflect changes
+
+## Theming
+
+Components use Tailwind classes that reference CSS custom properties:
+
+```css
+/* Consumer defines these (typically via data-role attribute) */
+--theme-50, --theme-100, ..., --theme-950
+```
+
+Tailwind config maps `theme-*` classes to these variables. Semantic colors (danger, warning, success, info) use hardcoded Tailwind colors — they don't change per role.
+
+## Exports
+
+```ts
+// Will be populated as components are migrated
+// Placeholder:
+VERSION
+```
+
+## Consumer Setup (jogi)
+
+```ts
+// jogi/tailwind.config.ts — content array
+'./node_modules/@avd/gizmos/dist/**/*.{js,mjs}'
+```
+
+```json
+// jogi/package.json — dependencies
+"@avd/gizmos": "github:luvidal/gizmos"
+```
+
+## Key Behaviors
+
+- Components are themeable via CSS variables, not props (except semantic colors)
+- No component imports domain data — all customization via props
+- `lucide-react` is a peer dependency — consumers provide it
