@@ -2050,7 +2050,7 @@ var Tabs = ({
         const isNewGroup = hasGroups && i > 0 && tab.group !== tabs[i - 1].group;
         const groupStyle = customStyle;
         return /* @__PURE__ */ jsxs(Fragment$1, { children: [
-          isNewGroup && /* @__PURE__ */ jsx("div", { className: "w-px bg-gray-200 mx-3 my-2 flex-shrink-0" }),
+          isNewGroup && /* @__PURE__ */ jsx("div", { className: "w-0.5 bg-gray-300 mx-2 my-2 flex-shrink-0 rounded-full" }),
           /* @__PURE__ */ jsxs(
             "button",
             {

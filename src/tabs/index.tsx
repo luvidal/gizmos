@@ -129,7 +129,7 @@ const Tabs = ({
                         const groupStyle = customStyle
                         return (
                             <Fragment key={tab.id}>
-                                {isNewGroup && <div className="w-px bg-gray-200 mx-3 my-2 flex-shrink-0" />}
+                                {isNewGroup && <div className="w-0.5 bg-gray-300 mx-2 my-2 flex-shrink-0 rounded-full" />}
                                 <button
                                     onClick={(e) => { e.stopPropagation(); handleTabClick(tab.id) }}
                                     style={groupStyle}
