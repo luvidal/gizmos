@@ -2052,7 +2052,7 @@ var Tabs = ({
         const showSpacer = hasGroups && i > 0 && tab.group !== tabs[i - 1].group;
         const tabFlex = hasGroups ? tab.group === firstGroup ? "flex-1" : "flex-shrink-0" : "flex-1";
         return /* @__PURE__ */ jsxRuntime.jsxs(react.Fragment, { children: [
-          showSpacer && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex-1" }),
+          showSpacer && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex-1 bg-gray-50" }),
           /* @__PURE__ */ jsxRuntime.jsxs(
             "button",
             {
@@ -2087,7 +2087,7 @@ var Tabs = ({
       const showSpacer = hasGroups && i > 0 && tab.group !== tabs[i - 1].group;
       const tabFlex = hasGroups ? tab.group === firstGroup ? "flex-1" : "flex-shrink-0" : "flex-1";
       return /* @__PURE__ */ jsxRuntime.jsxs(react.Fragment, { children: [
-        showSpacer && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex-1" }),
+        showSpacer && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex-1 bg-gray-50" }),
         /* @__PURE__ */ jsxRuntime.jsxs(
           "button",
           {

@@ -129,7 +129,7 @@ const Tabs = ({
                         const tabFlex = hasGroups ? (tab.group === firstGroup ? 'flex-1' : 'flex-shrink-0') : 'flex-1'
                         return (
                             <Fragment key={tab.id}>
-                                {showSpacer && <div className="flex-1" />}
+                                {showSpacer && <div className="flex-1 bg-gray-50" />}
                                 <button
                                     onClick={(e) => { e.stopPropagation(); handleTabClick(tab.id) }}
                                     style={customStyle}
@@ -167,7 +167,7 @@ const Tabs = ({
                     const tabFlex = hasGroups ? (tab.group === firstGroup ? 'flex-1' : 'flex-shrink-0') : 'flex-1'
                     return (
                         <Fragment key={tab.id}>
-                            {showSpacer && <div className="flex-1" />}
+                            {showSpacer && <div className="flex-1 bg-gray-50" />}
                             <button
                                 onClick={(e) => { e.stopPropagation(); handleTabClick(tab.id) }}
                                 style={customStyle}
