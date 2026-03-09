@@ -2049,7 +2049,7 @@ var Tabs = ({
         const customStyle = isActive ? hasCustomColors2 ? { backgroundColor: bg, color: fg } : void 0 : hasInactiveColors ? { backgroundColor: inactiveBackground, color: inactiveForeground } : void 0;
         const showSpacer = hasGroups && i > 0 && tab.group !== tabs[i - 1].group;
         const tabFlex = hasGroups ? tab.group === firstGroup ? "flex-1" : "flex-shrink-0" : "flex-1";
-        const tabStyle = hasGroups ? { ...customStyle, minWidth: 120 } : customStyle;
+        const tabStyle = hasGroups ? { ...customStyle, minWidth: 300 } : customStyle;
         return /* @__PURE__ */ jsxs(Fragment$1, { children: [
           showSpacer && /* @__PURE__ */ jsx("div", { className: "flex-1 bg-gray-50" }),
           /* @__PURE__ */ jsxs(
@@ -2085,7 +2085,7 @@ var Tabs = ({
       } : void 0;
       const showSpacer = hasGroups && i > 0 && tab.group !== tabs[i - 1].group;
       const tabFlex = hasGroups ? tab.group === firstGroup ? "flex-1" : "flex-shrink-0" : "flex-1";
-      const tabStyle = hasGroups ? { ...customStyle, minWidth: 120 } : customStyle;
+      const tabStyle = hasGroups ? { ...customStyle, minWidth: 300 } : customStyle;
       return /* @__PURE__ */ jsxs(Fragment$1, { children: [
         showSpacer && /* @__PURE__ */ jsx("div", { className: "flex-1 bg-gray-50" }),
         /* @__PURE__ */ jsxs(

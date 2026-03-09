@@ -127,7 +127,7 @@ const Tabs = ({
                             : (hasInactiveColors ? { backgroundColor: inactiveBackground, color: inactiveForeground } : undefined)
                         const showSpacer = hasGroups && i > 0 && tab.group !== tabs[i - 1].group
                         const tabFlex = hasGroups ? (tab.group === firstGroup ? 'flex-1' : 'flex-shrink-0') : 'flex-1'
-                        const tabStyle = hasGroups ? { ...customStyle, minWidth: 120 } : customStyle
+                        const tabStyle = hasGroups ? { ...customStyle, minWidth: 300 } : customStyle
                         return (
                             <Fragment key={tab.id}>
                                 {showSpacer && <div className="flex-1 bg-gray-50" />}
@@ -166,7 +166,7 @@ const Tabs = ({
                     } : undefined
                     const showSpacer = hasGroups && i > 0 && tab.group !== tabs[i - 1].group
                     const tabFlex = hasGroups ? (tab.group === firstGroup ? 'flex-1' : 'flex-shrink-0') : 'flex-1'
-                    const tabStyle = hasGroups ? { ...customStyle, minWidth: 120 } : customStyle
+                    const tabStyle = hasGroups ? { ...customStyle, minWidth: 300 } : customStyle
                     return (
                         <Fragment key={tab.id}>
                             {showSpacer && <div className="flex-1 bg-gray-50" />}
