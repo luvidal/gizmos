@@ -1,4 +1,4 @@
-import { useState, useEffect, ReactNode } from 'react'
+import { useState, useEffect, ReactNode, Fragment } from 'react'
 import Icon from '../common/icon'
 
 export interface Tab {
@@ -12,6 +12,8 @@ export interface Tab {
     selectedBackground?: string
     /** Custom foreground (text) color when this tab is selected */
     selectedForeground?: string
+    /** Group name for visual clustering. Tabs with different groups get a flex spacer between them. */
+    group?: string
 }
 
 export type { Tab as TabType }
@@ -105,12 +107,14 @@ const Tabs = ({
 
     if (tabs.length === 0) return null
 
+    const hasGroups = tabs.some(t => t.group !== undefined)
+
     // Underline variant (default) - matches detail header tab style
     if (variant === 'underline') {
         return (
             <div className={className}>
                 <div className="flex flex-shrink-0">
-                    {tabs.map(tab => {
+                    {tabs.map((tab, i) => {
                         const isActive = activeId === tab.id
                         // Per-tab colors take precedence over component-level colors
                         const bg = tab.selectedBackground ?? selectedBackground
@@ -120,19 +124,22 @@ const Tabs = ({
                         const customStyle = isActive
                             ? (hasCustomColors ? { backgroundColor: bg, color: fg } : undefined)
                             : (hasInactiveColors ? { backgroundColor: inactiveBackground, color: inactiveForeground } : undefined)
+                        const showSpacer = hasGroups && i > 0 && tab.group !== tabs[i - 1].group
                         return (
-                            <button
-                                key={tab.id}
-                                onClick={(e) => { e.stopPropagation(); handleTabClick(tab.id) }}
-                                style={customStyle}
-                                className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold py-3 sm:py-4 px-2 sm:px-4 md:px-5 truncate whitespace-nowrap overflow-hidden transition-all duration-200 ${rounded ? 'md:first:rounded-tl-btn md:last:rounded-tr-btn' : ''} ${isActive
-                                    ? hasCustomColors ? '' : 'text-theme-700 bg-white'
-                                    : hasInactiveColors ? 'hover:brightness-110' : 'text-gray-300 bg-gray-50 hover:text-gray-400 hover:bg-gray-100'
-                                    }`}
-                            >
-                                {tab.icon && <Icon name={tab.icon} size={16} className={`flex-shrink-0 ${isActive ? (hasCustomColors ? '' : 'text-theme-500') : (hasInactiveColors ? '' : 'text-gray-300')}`} style={isActive ? (fg ? { color: fg } : undefined) : (inactiveForeground ? { color: inactiveForeground } : undefined)} />}
-                                <span className='truncate'>{tab.shortLabel ? (<><span className="sm:hidden">{tab.shortLabel}</span><span className="hidden sm:inline">{tab.label}</span></>) : tab.label}</span>
-                            </button>
+                            <Fragment key={tab.id}>
+                                {showSpacer && <div className="flex-1" />}
+                                <button
+                                    onClick={(e) => { e.stopPropagation(); handleTabClick(tab.id) }}
+                                    style={customStyle}
+                                    className={`${hasGroups ? 'flex-shrink-0' : 'flex-1'} flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold py-3 sm:py-4 px-2 sm:px-4 md:px-5 truncate whitespace-nowrap overflow-hidden transition-all duration-200 ${rounded ? 'md:first:rounded-tl-btn md:last:rounded-tr-btn' : ''} ${isActive
+                                        ? hasCustomColors ? '' : 'text-theme-700 bg-white'
+                                        : hasInactiveColors ? 'hover:brightness-110' : 'text-gray-300 bg-gray-50 hover:text-gray-400 hover:bg-gray-100'
+                                        }`}
+                                >
+                                    {tab.icon && <Icon name={tab.icon} size={16} className={`flex-shrink-0 ${isActive ? (hasCustomColors ? '' : 'text-theme-500') : (hasInactiveColors ? '' : 'text-gray-300')}`} style={isActive ? (fg ? { color: fg } : undefined) : (inactiveForeground ? { color: inactiveForeground } : undefined)} />}
+                                    <span className='truncate'>{tab.shortLabel ? (<><span className="sm:hidden">{tab.shortLabel}</span><span className="hidden sm:inline">{tab.label}</span></>) : tab.label}</span>
+                                </button>
+                            </Fragment>
                         )
                     })}
                 </div>
@@ -148,25 +155,28 @@ const Tabs = ({
     return (
         <div className={className}>
             <div className="flex gap-2 p-2 bg-gray-100 rounded-xl">
-                {tabs.map(tab => {
+                {tabs.map((tab, i) => {
                     const isActive = activeId === tab.id
                     const customStyle = isActive && hasCustomColors ? {
                         backgroundColor: selectedBackground,
                         color: selectedForeground
                     } : undefined
+                    const showSpacer = hasGroups && i > 0 && tab.group !== tabs[i - 1].group
                     return (
-                        <button
-                            key={tab.id}
-                            onClick={(e) => { e.stopPropagation(); handleTabClick(tab.id) }}
-                            style={customStyle}
-                            className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm md:text-base font-medium py-2.5 sm:py-3 px-2 sm:px-4 md:px-5 rounded-btn transition-all duration-200 ${isActive
-                                ? hasCustomColors ? 'shadow-sm' : 'bg-white text-theme-700 shadow-sm'
-                                : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
-                                }`}
-                        >
-                            {tab.icon && <Icon name={tab.icon} size={16} className={`flex-shrink-0 ${isActive ? (hasCustomColors ? '' : 'text-theme-500') : ''}`} style={isActive && selectedForeground ? { color: selectedForeground } : undefined} />}
-                            <span className='truncate'>{tab.shortLabel ? (<><span className="sm:hidden">{tab.shortLabel}</span><span className="hidden sm:inline">{tab.label}</span></>) : tab.label}</span>
-                        </button>
+                        <Fragment key={tab.id}>
+                            {showSpacer && <div className="flex-1" />}
+                            <button
+                                onClick={(e) => { e.stopPropagation(); handleTabClick(tab.id) }}
+                                style={customStyle}
+                                className={`${hasGroups ? 'flex-shrink-0' : 'flex-1'} flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm md:text-base font-medium py-2.5 sm:py-3 px-2 sm:px-4 md:px-5 rounded-btn transition-all duration-200 ${isActive
+                                    ? hasCustomColors ? 'shadow-sm' : 'bg-white text-theme-700 shadow-sm'
+                                    : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                                    }`}
+                            >
+                                {tab.icon && <Icon name={tab.icon} size={16} className={`flex-shrink-0 ${isActive ? (hasCustomColors ? '' : 'text-theme-500') : ''}`} style={isActive && selectedForeground ? { color: selectedForeground } : undefined} />}
+                                <span className='truncate'>{tab.shortLabel ? (<><span className="sm:hidden">{tab.shortLabel}</span><span className="hidden sm:inline">{tab.label}</span></>) : tab.label}</span>
+                            </button>
+                        </Fragment>
                     )
                 })}
             </div>
