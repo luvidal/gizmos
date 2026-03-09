@@ -2048,7 +2048,7 @@ var Tabs = ({
         const hasInactiveColors = inactiveBackground || inactiveForeground;
         const customStyle = isActive ? hasCustomColors2 ? { backgroundColor: bg, color: fg } : void 0 : hasInactiveColors ? { backgroundColor: inactiveBackground, color: inactiveForeground } : void 0;
         const showSpacer = hasGroups && i > 0 && tab.group !== tabs[i - 1].group;
-        const tabFlex = hasGroups ? tab.group === firstGroup ? "flex-1" : "flex-shrink-0" : "flex-1";
+        const tabFlex = hasGroups ? tab.group === firstGroup ? "flex-1 min-w-[120px]" : "flex-shrink-0 min-w-[120px]" : "flex-1";
         return /* @__PURE__ */ jsxs(Fragment$1, { children: [
           showSpacer && /* @__PURE__ */ jsx("div", { className: "flex-1 bg-gray-50" }),
           /* @__PURE__ */ jsxs(
@@ -2083,7 +2083,7 @@ var Tabs = ({
         color: selectedForeground
       } : void 0;
       const showSpacer = hasGroups && i > 0 && tab.group !== tabs[i - 1].group;
-      const tabFlex = hasGroups ? tab.group === firstGroup ? "flex-1" : "flex-shrink-0" : "flex-1";
+      const tabFlex = hasGroups ? tab.group === firstGroup ? "flex-1 min-w-[120px]" : "flex-shrink-0 min-w-[120px]" : "flex-1";
       return /* @__PURE__ */ jsxs(Fragment$1, { children: [
         showSpacer && /* @__PURE__ */ jsx("div", { className: "flex-1 bg-gray-50" }),
         /* @__PURE__ */ jsxs(
