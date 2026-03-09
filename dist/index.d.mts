@@ -567,6 +567,8 @@ interface Tab {
     selectedBackground?: string;
     /** Custom foreground (text) color when this tab is selected */
     selectedForeground?: string;
+    /** Group name for visual clustering. Tabs with different groups get a flex spacer between them. */
+    group?: string;
 }
 
 interface TabsProps {
