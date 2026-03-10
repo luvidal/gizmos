@@ -226,6 +226,7 @@ interface PromptOptions {
     message: string;
     icon?: string;
     variant?: 'danger' | 'warning' | 'info';
+    defaultValue?: string;
 }
 interface PromptState extends PromptOptions {
     resolve: (value: string | null) => void;

@@ -727,7 +727,7 @@ var variantConfig2 = {
 var PromptDialog = ({ state, onDone }) => {
   const [visible, setVisible] = react.useState(false);
   const [leaving, setLeaving] = react.useState(false);
-  const [value, setValue] = react.useState("");
+  const [value, setValue] = react.useState(state.defaultValue ?? "");
   const dialogRef = react.useRef(null);
   const inputRef = react.useRef(null);
   react.useEffect(() => {
