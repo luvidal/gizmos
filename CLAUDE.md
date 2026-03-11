@@ -104,3 +104,18 @@ VERSION
 - Components are themeable via CSS variables, not props (except semantic colors)
 - No component imports domain data — all customization via props
 - `lucide-react` is a peer dependency — consumers provide it
+
+## TextField Icon Support
+
+`TextField` supports optional right-side icon via two props:
+
+```tsx
+icon?: string            // lucide icon name (e.g., "Eye", "Pencil", "MapPin")
+onIconClick?: () => void // if provided → interactive; if absent → decorative
+```
+
+- **Interactive** (`onIconClick` present): renders `<button>`, icon is `text-gray-500 hover:text-gray-700`, hover bg
+- **Decorative** (no `onIconClick`): renders `<span>`, icon is `text-gray-300`, `pointer-events-none`
+- When icon is present, input gets `pr-8` automatically to avoid text overlap
+- Input wrapped in `<div className="relative">` when icon is set (same pattern as NumberField's suffix)
+- Backward compatible — callers that don't pass `icon` see no change
