@@ -42,11 +42,16 @@ docs/
 └── *.md                   # Design docs, migration notes
 ```
 
+## Compact Instructions
+
+When compacting, preserve: file paths changed, errors found, decisions made, API changes. Drop: full file contents already read, tool output bodies.
+
 ## Communication Style
 
 - **No emotional validation** — never say "I understand your frustration". Results matter, not words.
 - **No excessive apologies** — don't apologize repeatedly. Fix the problem.
 - **Be direct** — state facts, propose solutions, execute. Skip the fluff.
+- **Ask for input** — when stuck or facing multiple approaches, ask rather than guessing.
 
 ## Spanish Copy Standard
 
@@ -67,6 +72,8 @@ All user-facing text uses informal **tú**, never **usted**:
 8. **Theming** — use CSS custom properties (`--theme-50` through `--theme-950`) for role-based colors. Semantic colors (danger=rose, warning=amber, success=emerald, info=violet) are hardcoded Tailwind values
 9. **After modifying a feature**, update this CLAUDE.md if any key behavior changed
 10. **README.md maintenance** — every modification to a component folder must update its `README.md` to reflect changes
+11. **Test coverage** — after implementing a feature, check if tests exist for the affected code (`tests/`). Update or write tests. Never leave a feature without test coverage.
+12. **Planning** — for non-trivial changes, write a plan to `docs/plans/` before implementing
 
 ## Theming
 

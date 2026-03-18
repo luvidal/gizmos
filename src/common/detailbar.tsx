@@ -50,15 +50,33 @@ export default function DetailBar({ title, subtitle, email, icon, toolbar, extra
   }
 
   if (isDark) {
+    if (onBack) {
+      return (
+        <div className='group/header bg-gradient-to-r from-theme-700 to-theme-600'>
+          <div className='flex items-center gap-4 px-4 pt-3 pb-1'>
+            {icon && <ToolBack icon={icon} onClick={onBack} variant='dark' />}
+            <div className='flex-1 min-w-0 flex flex-col items-start'>
+              {renderTitle('text-base font-medium text-white text-shadow-sm')}
+              <div className='flex items-center gap-1.5 min-w-0 mt-0.5'>
+                {subtitlePrefix && <span className='text-sm text-white/50 flex-shrink-0'>{subtitlePrefix}</span>}
+                {renderSubtitle('text-sm text-white/70')}
+                {extra && subtitle && <span className='text-white/30'>·</span>}
+                {extra}
+              </div>
+            </div>
+          </div>
+          {toolbar && <div className='flex justify-end px-4 pb-2'>{toolbar}</div>}
+        </div>
+      )
+    }
     const content = (
       <div className='flex items-center gap-4 px-4 py-3'>
-        {onBack && icon && <ToolBack icon={icon} onClick={onBack} variant='dark' />}
-        {!onBack && icon && <Icon name={icon} size={22} className='text-white/80' />}
+        {icon && <Icon name={icon} size={22} className='text-white/80' />}
         <div className='flex-1 min-w-0 flex flex-col items-start'>
-          {renderTitle(onBack ? 'text-base font-medium text-white text-shadow-sm' : 'text-lg font-bold uppercase tracking-wide text-white text-shadow-md')}
+          {renderTitle('text-lg font-bold uppercase tracking-wide text-white text-shadow-md')}
           <div className='flex items-center gap-1.5 min-w-0 mt-0.5'>
             {subtitlePrefix && <span className='text-sm text-white/50'>{subtitlePrefix}</span>}
-            {renderSubtitle(onBack ? 'text-sm text-white/70' : 'text-sm text-white/70')}
+            {renderSubtitle('text-sm text-white/70')}
             {extra && subtitle && <span className='text-white/30'>·</span>}
             {extra}
           </div>
@@ -66,9 +84,6 @@ export default function DetailBar({ title, subtitle, email, icon, toolbar, extra
         {toolbar && <div className='flex-shrink-0'>{toolbar}</div>}
       </div>
     )
-    if (onBack) {
-      return <div className='group/header bg-gradient-to-r from-theme-700 to-theme-600'>{content}</div>
-    }
     return content
   }
 

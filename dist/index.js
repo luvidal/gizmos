@@ -1506,23 +1506,36 @@ function DetailBar({ title, subtitle, email, icon, toolbar, extra, subtitlePrefi
     return subtitle;
   };
   if (isDark) {
+    if (onBack) {
+      return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "group/header bg-gradient-to-r from-theme-700 to-theme-600", children: [
+        /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex items-center gap-4 px-4 pt-3 pb-1", children: [
+          icon && /* @__PURE__ */ jsxRuntime.jsx(toolback_default, { icon, onClick: onBack, variant: "dark" }),
+          /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex-1 min-w-0 flex flex-col items-start", children: [
+            renderTitle("text-base font-medium text-white text-shadow-sm"),
+            /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex items-center gap-1.5 min-w-0 mt-0.5", children: [
+              subtitlePrefix && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-sm text-white/50 flex-shrink-0", children: subtitlePrefix }),
+              renderSubtitle("text-sm text-white/70"),
+              extra && subtitle && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-white/30", children: "\xB7" }),
+              extra
+            ] })
+          ] })
+        ] }),
+        toolbar && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex justify-end px-4 pb-2", children: toolbar })
+      ] });
+    }
     const content = /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex items-center gap-4 px-4 py-3", children: [
-      onBack && icon && /* @__PURE__ */ jsxRuntime.jsx(toolback_default, { icon, onClick: onBack, variant: "dark" }),
-      !onBack && icon && /* @__PURE__ */ jsxRuntime.jsx(icon_default, { name: icon, size: 22, className: "text-white/80" }),
+      icon && /* @__PURE__ */ jsxRuntime.jsx(icon_default, { name: icon, size: 22, className: "text-white/80" }),
       /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex-1 min-w-0 flex flex-col items-start", children: [
-        renderTitle(onBack ? "text-base font-medium text-white text-shadow-sm" : "text-lg font-bold uppercase tracking-wide text-white text-shadow-md"),
+        renderTitle("text-lg font-bold uppercase tracking-wide text-white text-shadow-md"),
         /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex items-center gap-1.5 min-w-0 mt-0.5", children: [
           subtitlePrefix && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-sm text-white/50", children: subtitlePrefix }),
-          renderSubtitle(onBack ? "text-sm text-white/70" : "text-sm text-white/70"),
+          renderSubtitle("text-sm text-white/70"),
           extra && subtitle && /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-white/30", children: "\xB7" }),
           extra
         ] })
       ] }),
       toolbar && /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex-shrink-0", children: toolbar })
     ] });
-    if (onBack) {
-      return /* @__PURE__ */ jsxRuntime.jsx("div", { className: "group/header bg-gradient-to-r from-theme-700 to-theme-600", children: content });
-    }
     return content;
   }
   return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "relative border-b border-theme-100 bg-theme-50", children: [
@@ -1812,7 +1825,7 @@ var Accordion = ({ sections, forceExpanded = false }) => {
         {
           id: contentId,
           role: "region",
-          className: `${section.contentClassName ?? "p-2.5 sm:p-4 bg-gray-50/30"} ${isExpanded ? "flex-1 min-h-0 overflow-auto" : "hidden print:block"}`,
+          className: `${section.contentClassName ?? "p-2.5 sm:p-4 bg-gray-50/30"} ${isExpanded ? "flex-1 min-h-0 overflow-y-auto" : "hidden print:block"}`,
           children: section.content
         }
       )
